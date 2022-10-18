@@ -5,7 +5,7 @@ import {useCallback, useEffect} from "react";
 import {useAuthStore} from "../../provider/AuthProvider";
 import {Address, ProviderRpcClient} from "everscale-inpage-provider";
 import {EverscaleStandaloneClient} from "everscale-standalone-client";
-import TransactionList from "./TransactionsList";
+import TransactionList from "./AccountTransactionsList";
 
 class AccountObservableState {
     constructor() {
@@ -46,10 +46,10 @@ const AccountSection = observer(() => {
             <>
                 {auth.loggedIn && auth.account?.address ? (
 
-                        <p className='py-2'>
+                        <div className='py-2'>
                             Transactions history:
                             <TransactionList items={state.items}/>
-                        </p>
+                        </div>
                     ) : <></>}
             </>
         )
