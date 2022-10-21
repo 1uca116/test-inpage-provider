@@ -11,15 +11,10 @@ const TransactionInfo = (props: ITransactionProps) => {
     };
 
     return (
-        <>
-            <li>
-                <div style={{display: 'flex', alignItems: 'center'}}>
-                    <div>{unixDateToStr(props.item.createdAt, 'DD.MM.YY HH:mm:ss')}</div>
-                    <div style={{paddingLeft: '10px'}}>{Number(props.item.inMessage.value) / 1000000000} EVER</div>
-                </div>
-            </li>
-
-        </>
+        <li className='flex items-center gap-3'>
+            <div>{unixDateToStr(props.item.createdAt, 'DD.MM.YY HH:mm:ss')}</div>
+            <div>{Number(props.item.inMessage.value) / 1000000000} EVER</div>
+        </li>
     )
 }
 

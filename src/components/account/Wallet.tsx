@@ -127,7 +127,7 @@ const Wallet = observer((props: IWallet) => {
 
     const WalletItem = (props: {tokens: ITokenModel[]}) => {
         return (
-            <div style={{display: 'flex'}}>
+            <div className='flex'>
                 Wallet:
                 {props.tokens.map((x, index) => (<div key={index}>
                     <>{x.total.toString()} {x.symbol}</>
@@ -137,7 +137,7 @@ const Wallet = observer((props: IWallet) => {
     }
 
     return (
-        <div style={{display: 'flex'}}>
+        <div className='flex'>
             <WalletItem tokens={balances}/>
         </div>
     )

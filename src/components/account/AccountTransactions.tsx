@@ -45,7 +45,6 @@ const AccountSection = observer(() => {
         return (
             <>
                 {auth.loggedIn && auth.account?.address ? (
-
                         <div className='py-2'>
                             Transactions history:
                             <TransactionList items={state.items}/>
