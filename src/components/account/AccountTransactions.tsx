@@ -45,11 +45,11 @@ const AccountSection = observer(() => {
         return (
             <>
                 {auth.loggedIn && auth.account?.address ? (
-                        <div className='py-2'>
-                            Transactions history:
-                            <TransactionList items={state.items}/>
-                        </div>
-                    ) : <></>}
+                    <div className='py-4'>
+                        <div className='font-bold text-2xl'>Transactions history:</div>
+                        <TransactionList items={state.items}/>
+                    </div>
+                ) : <></>}
             </>
         )
     }

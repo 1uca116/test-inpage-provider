@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import {useMemo} from 'react';
 import {ReactComponent as Close} from "../assets/close.svg";
 
 type ModalProps = {
@@ -8,7 +8,7 @@ type ModalProps = {
     children?: JSX.Element | JSX.Element[] | string;
 };
 
-const Modal = ({ size, show, children, onClose }: ModalProps) => {
+const Modal = ({size, show, children, onClose}: ModalProps) => {
     const modalClass = useMemo(() => {
         switch (size) {
             case 'sm':
@@ -22,7 +22,7 @@ const Modal = ({ size, show, children, onClose }: ModalProps) => {
 
     return (
         <div className='fixed inset-0 z-50 flex justify-center items-center'>
-            <div className='absolute inset-0 -z-10 modal_overlay_background' />
+            <div className='absolute inset-0 -z-10 modal_overlay_background'/>
             <div
                 className={`${modalClass} relative modal_background shadow-primary rounded-xl py-3`}
             >

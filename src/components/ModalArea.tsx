@@ -1,6 +1,6 @@
 import Modal from '../components/Modal';
-import { observer } from 'mobx-react-lite';
-import { useLayoutStore } from '../provider/LayoutStoreProvider';
+import {observer} from 'mobx-react-lite';
+import {useLayoutStore} from '../provider/LayoutStoreProvider';
 
 const ModalArea = observer(() => {
     const layoutStore = useLayoutStore();

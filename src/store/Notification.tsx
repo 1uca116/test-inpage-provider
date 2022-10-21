@@ -1,4 +1,4 @@
-import { makeAutoObservable, runInAction } from 'mobx';
+import {makeAutoObservable, runInAction} from 'mobx';
 
 export enum NotificationType {
     Success = 'success',
@@ -16,12 +16,12 @@ export type Notification = {
 const defaultDurationSeconds: number = 5;
 
 export class NotificationStore {
+    notifications: Notification[] = [];
+    private lastId: number = 0;
+
     constructor() {
         makeAutoObservable(this);
     }
-
-    private lastId: number = 0;
-    notifications: Notification[] = [];
 
     addNotification(props: {
         text: string;

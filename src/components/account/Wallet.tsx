@@ -8,14 +8,15 @@ interface ITokenModel {
     total: BigNumber;
     symbol: string;
 }
+
 interface IWallet {
     address: string
 }
 
 const Wallet = observer((props: IWallet) => {
-    const ever = useMemo(()=> new ProviderRpcClient(), [] );
+    const ever = useMemo(() => new ProviderRpcClient(), []);
 
-    const auth =  useAuthStore();
+    const auth = useAuthStore();
     const [balances, setTokenBalances] = useState<ITokenModel[]>([]);
 
     useEffect(() => {
@@ -123,11 +124,11 @@ const Wallet = observer((props: IWallet) => {
                 setTokenBalances(balances);
             }
         }
+
         getTokenBalance().catch(console.error);
     }, [])
 
-
-    const WalletItem = (props: {tokens: ITokenModel[]}) => {
+    const WalletItem = (props: { tokens: ITokenModel[] }) => {
         return (
             <div className='flex'>
                 Wallet:

@@ -1,7 +1,6 @@
-
-import { makeAutoObservable, runInAction } from 'mobx';
-import { LayoutStore } from './Modals';
-import { ProviderRpcClient } from 'everscale-inpage-provider';
+import {makeAutoObservable, runInAction} from 'mobx';
+import {LayoutStore} from './Modals';
+import {ProviderRpcClient} from 'everscale-inpage-provider';
 
 
 type EverAccount = {
