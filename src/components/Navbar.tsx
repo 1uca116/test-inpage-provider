@@ -14,14 +14,15 @@ const Navbar = observer(() => {
         }, [auth]);
 
         return (
-            <div>
+            <div className='py-4'>
                 {auth.loggedIn && auth.account?.address ? (
                     <>
                         <button
-                            className='btn_primary px-5 py-2 disabled:opacity-60 '
+                            className='px-5 rounded-md border border-slate-200 bg-rose-400 text-white'
                             onClick={onEverLogoutClick}
+                            type={'button'}
                         >
-                            <span className='md:hidden'>Log out</span>
+                            Log out
                         </button>
 
                         <p className='py-2'>{auth.account.address}</p>
@@ -29,10 +30,11 @@ const Navbar = observer(() => {
                 ) : (
                     <>
                         <button
-                            className='btn_primary px-5 py-2 disabled:opacity-60 '
+                            className='px-5 rounded-md border border-slate-200 bg-blue-400 text-white '
                             onClick={onEverLoginClick}
+                            type={'button'}
                         >
-                            <span className='md:hidden'>Login</span>
+                            Login
                         </button>
                         <p className='py-2'>not logged in</p>
                     </>
