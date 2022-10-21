@@ -1,5 +1,5 @@
 import {observer} from "mobx-react-lite";
-import {useMemo, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {Address, ProviderRpcClient} from "everscale-inpage-provider";
 import {useAuthStore} from "../../provider/AuthProvider";
 import BigNumber from "bignumber.js";
@@ -18,68 +18,69 @@ const Wallet = observer((props: IWallet) => {
     const auth =  useAuthStore();
     const [balances, setTokenBalances] = useState<ITokenModel[]>([]);
 
-    async function getTokenBalance() {
+    useEffect(() => {
+        async function getTokenBalance() {
 
-        const tokenRootAbi = {
-            'ABI version': 2,
-            "version": "2.2",
-            'header': ['pubkey', 'time', 'expire'],
-            'functions': [
-                {
-                    "name": "walletOf",
-                    "inputs": [
-                        {"name": "answerId", "type": "uint32"},
-                        {"name": "walletOwner", "type": "address"}
-                    ],
-                    "outputs": [
-                        {"name": "value0", "type": "address"}
-                    ]
-                },
-                {
-                    "name": "symbol",
-                    "inputs": [
-                        {"name": "answerId", "type": "uint32"}
-                    ],
-                    "outputs": [
-                        {"name": "value0", "type": "string"}
-                    ]
-                },
-                {
-                    "name": "decimals",
-                    "inputs": [
-                        {"name": "answerId", "type": "uint32"}
-                    ],
-                    "outputs": [
-                        {"name": "value0", "type": "uint8"}
-                    ]
-                },
-            ],
-            'data': [],
-            'events': [],
-        } as const;
-
-        const tokenWalletAbi = {
-            'ABI version': 2,
-            'header': ['pubkey', 'time', 'expire'],
-            'functions': [{
-                "name": "balance",
-                "inputs": [
-                    {"name": "answerId", "type": "uint32"}
+            const tokenRootAbi = {
+                'ABI version': 2,
+                "version": "2.2",
+                'header': ['pubkey', 'time', 'expire'],
+                'functions': [
+                    {
+                        "name": "walletOf",
+                        "inputs": [
+                            {"name": "answerId", "type": "uint32"},
+                            {"name": "walletOwner", "type": "address"}
+                        ],
+                        "outputs": [
+                            {"name": "value0", "type": "address"}
+                        ]
+                    },
+                    {
+                        "name": "symbol",
+                        "inputs": [
+                            {"name": "answerId", "type": "uint32"}
+                        ],
+                        "outputs": [
+                            {"name": "value0", "type": "string"}
+                        ]
+                    },
+                    {
+                        "name": "decimals",
+                        "inputs": [
+                            {"name": "answerId", "type": "uint32"}
+                        ],
+                        "outputs": [
+                            {"name": "value0", "type": "uint8"}
+                        ]
+                    },
                 ],
-                "outputs": [
-                    {"name": "value0", "type": "uint128"}
-                ]
-            }],
-            'data': [],
-            'events': [],
-        } as const;
+                'data': [],
+                'events': [],
+            } as const;
 
-        const addressTokenRoot = new Address(props.address);
+            const tokenWalletAbi = {
+                'ABI version': 2,
+                'header': ['pubkey', 'time', 'expire'],
+                'functions': [{
+                    "name": "balance",
+                    "inputs": [
+                        {"name": "answerId", "type": "uint32"}
+                    ],
+                    "outputs": [
+                        {"name": "value0", "type": "uint128"}
+                    ]
+                }],
+                'data': [],
+                'events': [],
+            } as const;
 
-        let balances: ITokenModel[] = [];
+            const addressTokenRoot = new Address(props.address);
 
-        if (auth.account) {
-                const contract = new ever.Contract(tokenRootAbi,addressTokenRoot);
+            let balances: ITokenModel[] = [];
+
+            if (auth.account) {
+                const contract = new ever.Contract(tokenRootAbi, addressTokenRoot);
 
                 const address = new Address(auth.account.address);
                 const tokenWalletAddress = await contract
@@ -118,12 +119,13 @@ const Wallet = observer((props: IWallet) => {
                 } catch (e) {
                 }
                 const balance = (new BigNumber(resultBalance).div(new BigNumber(10).pow(tokenDecimals)));
-                balances.push({total: balance, symbol: tokenSymbol.value0} );
+                balances.push({total: balance, symbol: tokenSymbol.value0});
                 setTokenBalances(balances);
             }
-    }
+        }
+        getTokenBalance().catch(console.error);
+    }, [])
 
-    getTokenBalance().catch(console.error);
 
     const WalletItem = (props: {tokens: ITokenModel[]}) => {
         return (
