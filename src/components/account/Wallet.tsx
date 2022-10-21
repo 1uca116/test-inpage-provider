@@ -1,21 +1,21 @@
-import {
-    Address,
-    ProviderRpcClient,
-} from 'everscale-inpage-provider';
-import {usdt, wever} from "../../utils/tokens";
-import  {useState} from "react";
-import {useAuthStore} from "../../provider/AuthProvider";
-import BigNumber from 'bignumber.js';
 import {observer} from "mobx-react-lite";
+import {useMemo, useState} from "react";
+import {Address, ProviderRpcClient} from "everscale-inpage-provider";
+import {useAuthStore} from "../../provider/AuthProvider";
+import BigNumber from "bignumber.js";
 
 interface ITokenModel {
     total: BigNumber;
     symbol: string;
 }
+interface IWallet {
+    address: string
+}
 
-const Wallet = observer(() => {
-    const ever = new ProviderRpcClient();
-    const auth = useAuthStore();
+const Wallet = observer((props: IWallet) => {
+    const ever = useMemo(()=> new ProviderRpcClient(), [] );
+
+    const auth =  useAuthStore();
     const [balances, setTokenBalances] = useState<ITokenModel[]>([]);
 
     async function getTokenBalance() {
@@ -74,16 +74,12 @@ const Wallet = observer(() => {
             'events': [],
         } as const;
 
-        const usdtTokenRoot = new Address(usdt);
-        const weverTokenRoot = new Address(wever)
+        const addressTokenRoot = new Address(props.address);
 
-        const tokens = [usdtTokenRoot, weverTokenRoot];
         let balances: ITokenModel[] = [];
 
         if (auth.account) {
-            for (let token of tokens) {
-
-                const contract = new ever.Contract(tokenRootAbi, token);
+                const contract = new ever.Contract(tokenRootAbi,addressTokenRoot);
 
                 const address = new Address(auth.account.address);
                 const tokenWalletAddress = await contract
@@ -107,7 +103,7 @@ const Wallet = observer(() => {
                     .symbol({answerId: 0})
                     .call({responsible: true})
 
-                let tokenBal = '0';
+                let resultBalance = '0';
                 try {
                     const tokenWalletContract = new ever.Contract(tokenWalletAbi, tokenWalletAddress.value0);
                     const tokenBalance = await tokenWalletContract
@@ -117,21 +113,19 @@ const Wallet = observer(() => {
                         }).call({
                             responsible: true
                         });
-                    tokenBal = tokenBalance.value0;
+                    resultBalance = tokenBalance.value0;
 
                 } catch (e) {
                 }
-                const balance = (new BigNumber(tokenBal).div(new BigNumber(10).pow(tokenDecimals)));
+                const balance = (new BigNumber(resultBalance).div(new BigNumber(10).pow(tokenDecimals)));
                 balances.push({total: balance, symbol: tokenSymbol.value0} );
                 setTokenBalances(balances);
             }
-        }
     }
 
     getTokenBalance().catch(console.error);
 
-    const WalletTable = (props: {tokens: ITokenModel[]}) => {
-
+    const WalletItem = (props: {tokens: ITokenModel[]}) => {
         return (
             <div style={{display: 'flex'}}>
                 Wallet:
@@ -139,16 +133,14 @@ const Wallet = observer(() => {
                     <>{x.total.toString()} {x.symbol}</>
                 </div>))}
             </div>
-   )
+        )
     }
 
     return (
         <div style={{display: 'flex'}}>
-            <WalletTable tokens={balances}/>
+            <WalletItem tokens={balances}/>
         </div>
     )
-}
-)
+})
 
-
-export default Wallet;
+export default Wallet
