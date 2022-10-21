@@ -9,10 +9,17 @@ const TransactionInfo = (props: ITransactionProps) => {
     const unixDateToStr = (number: number, format: string) => {
         return moment.unix(number).format(format);
     };
+
     return (
-        <li>
-            {unixDateToStr(props.item.createdAt, 'DD.MM.YY HH:mm:ss')}
-        </li>
+        <>
+            <li>
+                <div style={{display: 'flex', alignItems: 'center'}}>
+                    <div>{unixDateToStr(props.item.createdAt, 'DD.MM.YY HH:mm:ss')}</div>
+                    <div style={{paddingLeft: '10px'}}>{Number(props.item.inMessage.value) / 1000000000} EVER</div>
+                </div>
+            </li>
+
+        </>
     )
 }
 
@@ -24,9 +31,9 @@ interface ITransactionListProps {
 const TransactionList = (props: ITransactionListProps) => {
     return (
         <ol>
-                {props.items?.map((item: Transaction, index) => (
-                    <TransactionInfo item={item} key={index}/>
-                ))}
+            {props.items?.map((item: Transaction, index) => (
+                <TransactionInfo item={item} key={index}/>
+            ))}
         </ol>
     );
 };

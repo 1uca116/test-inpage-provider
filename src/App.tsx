@@ -11,7 +11,6 @@ function App() {
 
     const AppProviders = ({children}: { children: JSX.Element }) => {
         return (
-
             <ProvideNotification>
                 <ProvideLayout>
                     <ProvideAuth>
