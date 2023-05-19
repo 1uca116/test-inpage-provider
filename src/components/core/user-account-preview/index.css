@@ -1,0 +1,14 @@
+.acc_preview-main {
+  @apply flex flex-row gap-2;
+}
+.acc_preview-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+}
+.acc_preview-info {
+   @apply hidden sm:block
+}
+.acc_preview-address {
+    @apply text-secondaryText-900
+}

@@ -1,0 +1,36 @@
+.theme-dark {
+  --color-primary-t-900: 255, 255, 255;
+  --color-secondary-t-900: 100, 100, 100;
+  /*--color-secondary-t-600: 122, 132, 140;*/
+  --color-tertiary-t-900: 5, 26, 37;
+
+  --color-primary-bg-900: 29, 29, 28;
+  --color-primary-bg-800: 40, 40, 40;
+  --color-primary-bg-700: 61, 61, 61;
+
+  /*--color-primary-bd-900: 29, 48, 57;*/
+  /*--color-primary-bd-800: 42, 65, 77;*/
+
+  /*--color-backdrop: #051a25e5;*/
+
+  --color-accent-lavander: #bfb3fc;
+  --color-accent-pink: #ffb0da;
+  --color-accent-lime: #e0ff7e;
+  --color-accent-orange: #ffd29f;
+
+  --color-success: 186,250,70;
+  --color-danger: 236,86,50;
+
+  --color-btn-primary-bg: #ffffff;
+  --color-btn-primary: #1d1d1c;
+  --color-btn-secondary-bg: #3d3d3d;
+  --color-btn-secondary: #ffffff;
+  --color-btn-tertiary-bg: #1d1d1c;
+  --color-btn-tertiary: #ffffff;
+
+  /*--scrollbar-width: 4px;*/
+  /*--scrollbar-color: #7a848c;*/
+
+  /*--color-chart-main: #2b63f1;*/
+  /*--color-chart-axis: #eeeef0;*/
+}

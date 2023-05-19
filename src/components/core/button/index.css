@@ -1,0 +1,26 @@
+.button {
+    @apply flex items-center justify-center;
+    @apply px-3 py-2 rounded-xl text-sm;
+}
+
+.button:disabled {
+    @apply text-primaryText-900/50;
+}
+
+.spinner_btn {
+    @apply mr-2;
+}
+
+.primary {
+    background: var(--color-btn-primary-bg);
+    color: var(--color-btn-primary);
+}
+
+.secondary {
+    background: var(--color-btn-secondary-bg);
+    color: var(--color-btn-secondary);
+}
+.tertiary {
+    background: var(--color-btn-tertiary-bg);
+    color: var(--color-btn-tertiary);
+}

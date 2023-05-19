@@ -1,0 +1,24 @@
+.navbar_body {
+  @apply bg-primaryBg-800 rounded-2xl;
+  @apply px-8 py-4 m-4;
+}
+
+.navbar_main {
+  @apply flex flex-row;
+  @apply justify-between items-center;
+}
+
+.navbar_logo {
+  @apply text-4xl md:text-5xl;
+  @apply flex-none;
+}
+
+.navbar_links {
+  @apply grow mx-10;
+  @apply hidden sm:flex;
+  @apply gap-10 items-center;
+}
+
+.navbar_links-item:hover {
+  color: var(--color-accent-lime);
+}
