@@ -1,5 +1,5 @@
 import {makeAutoObservable, runInAction} from 'mobx';
-import {LayoutStore} from './Modals';
+import {LayoutStore} from './LayoutStore';
 import {ProviderRpcClient} from 'everscale-inpage-provider';
 
 
