@@ -1,26 +1,27 @@
-import {observer, useLocalObservable} from 'mobx-react-lite';
-import {createContext, useContext, useEffect} from 'react';
-import {AuthStore} from '../store/Auth';
-import {useLayoutStore} from './LayoutStoreProvider';
+import { observer, useLocalObservable } from 'mobx-react-lite';
+import { createContext, useContext, useEffect } from 'react';
+import { AuthStore } from '../store/AuthStore';
+import { useLayoutStore } from './LayoutStoreProvider';
+import { useApi } from './ApiProvider';
 
 const authContext = createContext({} as AuthStore);
 
-export const ProvideAuth = observer(({children}: any) => {
+export const ProvideAuth = observer(({ children }: any) => {
+  const api = useApi();
+  const layoutStore = useLayoutStore();
+  const store = useLocalObservable(() => new AuthStore(api, layoutStore));
 
-    const layoutStore = useLayoutStore();
-    const store = useLocalObservable(() => new AuthStore(layoutStore));
+  useEffect(() => {
+    store.init();
+  }, [store]);
 
-    useEffect(() => {
-        store.init();
-    }, [store]);
+  if (!store.initialized) {
+    return null;
+  }
 
-    if (!store.initialized) {
-        return null;
-    }
-
-    return <authContext.Provider value={store}>{children}</authContext.Provider>;
+  return <authContext.Provider value={store}>{children}</authContext.Provider>;
 });
 
 export const useAuthStore = () => {
-    return useContext(authContext);
+  return useContext(authContext);
 };

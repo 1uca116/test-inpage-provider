@@ -1,10 +1,7 @@
-import React from "react";
+import React from 'react';
 
 const MainPage = () => {
-    return (<div>
-        MAIN IS HERE
-        EXPLORE
-    </div>)
-}
+  return <div>MAIN IS HERE EXPLORE</div>;
+};
 
-export default MainPage
+export default MainPage;

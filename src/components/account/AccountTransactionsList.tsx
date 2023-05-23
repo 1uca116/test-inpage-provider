@@ -54,7 +54,7 @@ const TransactionList = (props: ITransactionListProps) => {
       </thead>
       <tbody>
         {props.items?.map((item: Transaction, index) => (
-          <TransactionInfo item={item} key={index} />
+          <TransactionInfo key={index} item={item} />
         ))}
       </tbody>
     </table>

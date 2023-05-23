@@ -13,7 +13,7 @@ interface IWallet {
   address: string;
 }
 
-const Wallet = observer((props: IWallet) => {
+const WalletSimple = observer((props: IWallet) => {
   const ever = useMemo(() => new ProviderRpcClient(), []);
 
   const auth = useAuthStore();
@@ -136,4 +136,4 @@ const Wallet = observer((props: IWallet) => {
   );
 });
 
-export default Wallet;
+export default WalletSimple;

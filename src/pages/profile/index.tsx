@@ -1,13 +1,12 @@
 import React from 'react';
-import Account from '../../components/account/Account';
-import AccountSection from '../../components/account/AccountTransactions';
+import { Route, Routes } from 'react-router-dom';
+import Profile from '../../modules/profile';
 
 const ProfilePage = () => {
   return (
-    <div>
-      <Account />
-      <AccountSection />
-    </div>
+    <Routes>
+      <Route path=':address/*' element={<Profile />} />
+    </Routes>
   );
 };
 

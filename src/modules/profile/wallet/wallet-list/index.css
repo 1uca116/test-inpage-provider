@@ -1,0 +1,19 @@
+.wallet-list_main {
+  @apply flex flex-col;
+}
+.wallet-list_header {
+  @apply grid grid-cols-4;
+}
+.wallet-list_title {
+  @apply px-8 py-2;
+  @apply uppercase text-secondaryText-900;
+}
+
+.wallet-item_table {
+  @apply bg-primaryBg-900;
+  @apply rounded-2xl;
+  @apply grid grid-cols-4;
+}
+.wallet-item_cell {
+  @apply px-8 py-4;
+}

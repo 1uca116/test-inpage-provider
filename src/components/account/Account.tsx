@@ -2,7 +2,7 @@ import { Address, ProviderRpcClient } from 'everscale-inpage-provider';
 import { useAuthStore } from '../../provider/AuthProvider';
 import { useMemo, useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import Wallet from './Wallet';
+import WalletSimple from './WalletSimple';
 import { usdt, wever } from '../../utils/tokens';
 
 const Account = observer(() => {
@@ -40,8 +40,8 @@ const Account = observer(() => {
               <div>Wallet type: {auth.account?.walletType}</div>
             </li>
             <li className='bg-blue-400 group w-full flex flex-col items-center justify-center rounded-md border-2 p-3'>
-              <Wallet address={wever} />
-              <Wallet address={usdt} />
+              <WalletSimple address={wever} />
+              <WalletSimple address={usdt} />
             </li>
           </ul>
         </>

@@ -16,11 +16,15 @@ const Navbar = observer(() => {
     () => [
       {
         url: `/${ROUTES.nft.path}`,
-        text: 'NFT',
+        text: 'Explore NFT',
       },
       {
         url: `/${ROUTES.stats.path}`,
-        text: 'Stats',
+        text: 'Statistics',
+      },
+      {
+        url: `/${ROUTES.bundles.path}`,
+        text: 'Bundles',
       },
     ],
     []
@@ -37,7 +41,12 @@ const Navbar = observer(() => {
     <div className='navbar_body'>
       {auth.loggedIn && auth.account?.address ? (
         <div className='navbar_main'>
-          <FaWallet className='navbar_logo' />
+          <Link
+            to={`${ROUTES.profile.path}/${auth.account.address}`}
+            key={`${ROUTES.profile.path}`}
+          >
+            <FaWallet className='navbar_logo navbar_links-item' />
+          </Link>
           <div className='navbar_links'>
             {links.map((link) => (
               <Link key={link.url} to={link.url} className='navbar_links-item'>
@@ -52,11 +61,7 @@ const Navbar = observer(() => {
           <div className='flex-none flex items-center gap-2'>
             <UserAccountPreview address={auth.account.address} />
             <GiHamburgerMenu className='text-3xl block sm:hidden' />
-
           </div>
-          {/*<div className='flex-none text-4xl'>*/}
-          {/*  <GiHamburgerMenu />*/}
-          {/*</div>*/}
         </div>
       ) : (
         <>
