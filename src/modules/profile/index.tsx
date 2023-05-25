@@ -5,7 +5,7 @@ import {
   ProvideProfilePortfolioStore,
   useProfilePortfolioStore,
 } from './providers/ProfilePortfolioStoreProvider';
-import ProfilePortfolio from '../profile/components/ProfilePortfolio';
+import ProfilePortfolio from './components';
 import { ProvideProfileAnalyticsStore } from './providers/ProfileAnalyticsStoreProvider';
 
 const ProfilePage = observer(() => {

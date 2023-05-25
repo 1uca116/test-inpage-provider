@@ -66,4 +66,5 @@ const WalletList = ({ assets }: { assets: TokenBalanceModel[] }) => {
     </div>
   );
 };
+
 export default WalletList;
